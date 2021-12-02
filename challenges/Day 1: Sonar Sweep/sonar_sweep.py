@@ -17,7 +17,7 @@ times = 0
 i = 0
 window = { 0: 0, 1: 0, 2: 0, 'sum': 0 }
 
-# TODO: only use a string and shift it
+# TODO: use only a string and shift it
 def add(num):
   window['sum'] = (window['sum'] - window[2]) + num
   window[2] = window[1]
@@ -27,9 +27,8 @@ def add(num):
 with open(input_path) as f:
   for line in f:
     i+=1
-    current = float(line)
     sum = window['sum']
-    add(current)
+    add(float(line))
     if ( i > 3 and window['sum'] > sum ):
       times+=1
 
