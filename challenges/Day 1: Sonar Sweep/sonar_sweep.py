@@ -1,5 +1,5 @@
 
-input_path = 'advent_of_code_2021/challenges/Day 1: Sonar Sweep/input.txt'
+input_path = 'advent_of_code_2021/challenges/Day 1: Sonar Sweep/input'
 # Part 1
 times = -1
 last = float('-inf')
