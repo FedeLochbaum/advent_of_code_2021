@@ -19,7 +19,6 @@ gamma_rate, epsilon_rate = reduce(lambda acc, elem: [
 print(int(gamma_rate, 2) * int(epsilon_rate, 2))
 
 # Part 2
-
 def split_numbers(index, numbers):
   return reduce(lambda acc, binary:
   [
