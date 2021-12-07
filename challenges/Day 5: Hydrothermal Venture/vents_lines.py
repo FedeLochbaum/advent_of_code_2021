@@ -2,7 +2,7 @@ from functools import reduce
 input_path = 'advent_of_code_2021/challenges/Day 5: Hydrothermal Venture/input'
 
 # TODO: avoid to use a matrix
-matrix = [ [ 0 for _ in range(1000)] for _ in range(1000)]
+matrix = [[ 0 for _ in range(1000)] for _ in range(1000)]
 collisions = set()
 
 def split_line(line):
