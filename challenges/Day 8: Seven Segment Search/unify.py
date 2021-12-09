@@ -15,11 +15,11 @@ def is_easy(string): return len(string) in [2, 3, 4, 7]
 def make_constraint_matrix(patterns):
   matrix = make_matrix()
   for pattern in patterns:
-    pair = list(easy_by_len[len(pattern)])
+    pair = easy_by_len[len(pattern)]
     for char in pattern: matrix[char] = matrix[char].intersection(pair)
   return matrix
 
-def sustitution_by(index): return lambda value: ''.join(sorted(''.join(map(lambda c: index[c], value))))
+def sustitution_by(index): return lambda value: ''.join(sorted(map(lambda c: index[c], value)))
 
 def is_valid_sustituion(sustitution, patterns):
   for value in patterns:
@@ -32,13 +32,13 @@ def assignment(possible_assignments, patterns, stack, index):
     return sustitution if is_valid_sustituion(sustitution, patterns) else None
 
   current = stack.pop()
-  for assign in possible_assignments[current]:
-    if (assign in index.values()): continue
+  for assign in possible_assignments[current] - set(index.values()):
     index[current] = assign
-    res = assignment(possible_assignments, patterns, stack.copy(), index)
+    res = assignment(possible_assignments, patterns, stack, index)
     if (res != None): return res
     index[current] = None
+  stack.insert(0, current)
 
 def unify(patterns):
   trivials = list(filter(is_easy, patterns))
-  return assignment(make_constraint_matrix(trivials), patterns, { 'a', 'b', 'c', 'd', 'e', 'f', 'g' }, {})
+  return assignment(make_constraint_matrix(trivials), patterns, [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ], {})
