@@ -1,11 +1,8 @@
+def digits(): return ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 def make_matrix(): return {
-  'a': set(['a', 'b', 'c', 'd', 'e', 'e', 'f', 'g']),
-  'b': set(['a', 'b', 'c', 'd', 'e', 'e', 'f', 'g']),
-  'c': set(['a', 'b', 'c', 'd', 'e', 'e', 'f', 'g']),
-  'd': set(['a', 'b', 'c', 'd', 'e', 'e', 'f', 'g']),
-  'e': set(['a', 'b', 'c', 'd', 'e', 'e', 'f', 'g']),
-  'f': set(['a', 'b', 'c', 'd', 'e', 'e', 'f', 'g']),
-  'g': set(['a', 'b', 'c', 'd', 'e', 'e', 'f', 'g']),
+  'a': set(digits()), 'b': set(digits()), 'c': set(digits()),
+  'd': set(digits()),
+  'e': set(digits()), 'f': set(digits()), 'g': set(digits()),
 }
 
 number_by_digitis = { 'abcefg': 0, 'cf': 1, 'acdeg': 2, 'acdfg': 3, 'bcdf': 4, 'abdfg': 5, 'abdefg': 6, 'acf': 7, 'abcdefg': 8, 'abcdfg': 9 }
@@ -41,4 +38,4 @@ def assignment(possible_assignments, patterns, stack, index):
 
 def unify(patterns):
   trivials = list(filter(is_easy, patterns))
-  return assignment(make_constraint_matrix(trivials), patterns, [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ], {})
+  return assignment(make_constraint_matrix(trivials), patterns, digits(), {})
