@@ -1,0 +1,20 @@
+python -m cProfile advent_of_code_2021/challenges/Day\ 5:\ Hydrothermal\ Venture/vents_lines.py
+21698
+         31152 function calls in 0.124 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.080    0.080    0.124    0.124 vents_lines.py:1(<module>)
+      500    0.035    0.000    0.037    0.000 vents_lines.py:14(check)
+      500    0.001    0.000    0.002    0.000 vents_lines.py:8(split_line)
+      178    0.000    0.000    0.000    0.000 {abs}
+        1    0.000    0.000    0.000    0.000 {len}
+     1000    0.001    0.000    0.001    0.000 {map}
+     1000    0.000    0.000    0.000    0.000 {max}
+    23969    0.002    0.000    0.002    0.000 {method 'add' of 'set' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+     1500    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
+     1000    0.000    0.000    0.000    0.000 {min}
+        1    0.000    0.000    0.000    0.000 {open}
+     1501    0.004    0.000    0.004    0.000 {range}

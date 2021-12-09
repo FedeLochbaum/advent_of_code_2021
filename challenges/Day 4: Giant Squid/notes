@@ -1,0 +1,27 @@
+python -m cProfile advent_of_code_2021/challenges/Day\ 4:\ Giant\ Squid/bingo.py
+44088
+23670
+         23701 function calls in 0.010 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.002    0.002    0.010    0.010 bingo.py:1(<module>)
+      500    0.001    0.000    0.001    0.000 bingo.py:13(add_row)
+     4363    0.001    0.000    0.001    0.000 bingo.py:17(<genexpr>)
+     1557    0.001    0.000    0.002    0.000 bingo.py:17(won_row)
+     1507    0.001    0.000    0.001    0.000 bingo.py:19(won_column)
+     6105    0.002    0.000    0.004    0.000 bingo.py:24(annotate)
+     2500    0.001    0.000    0.001    0.000 bingo.py:32(<lambda>)
+      100    0.000    0.000    0.001    0.000 bingo.py:32(unmarked_sum)
+        1    0.000    0.000    0.000    0.000 bingo.py:7(Board)
+      100    0.000    0.000    0.000    0.000 bingo.py:8(__init__)
+      100    0.000    0.000    0.001    0.000 {_functools.reduce}
+     1557    0.000    0.000    0.001    0.000 {all}
+     2500    0.000    0.000    0.000    0.000 {len}
+      700    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+      100    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
+      501    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {open}
+     1507    0.000    0.000    0.000    0.000 {range}

@@ -1,0 +1,12 @@
+python -m cProfile advent_of_code_2021/challenges/Day\ 1:\ Sonar\ Sweep/sonar_sweep.py
+1162
+1190
+         2004 function calls in 0.002 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.001    0.001    0.002    0.002 sonar_sweep.py:2(<module>)
+     2000    0.001    0.000    0.001    0.000 sonar_sweep.py:21(add)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        2    0.000    0.000    0.000    0.000 {open}

@@ -1,0 +1,20 @@
+python -m cProfile advent_of_code_2021/challenges/Day\ 3:\ Binary\ Diagnostic/diagnostic.py
+4160394
+4125600
+         5105 function calls (5088 primitive calls) in 0.006 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.002    0.002    0.006    0.006 diagnostic.py:1(<module>)
+       12    0.000    0.000    0.000    0.000 diagnostic.py:15(<lambda>)
+       18    0.000    0.000    0.004    0.000 diagnostic.py:22(split_numbers)
+     2997    0.002    0.000    0.002    0.000 diagnostic.py:23(<lambda>)
+       17    0.000    0.000    0.000    0.000 diagnostic.py:31(winning_bit)
+     19/2    0.000    0.000    0.002    0.001 diagnostic.py:35(get_values)
+       19    0.001    0.000    0.004    0.000 {_functools.reduce}
+       19    0.000    0.000    0.000    0.000 {len}
+     1000    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 {open}
+     1001    0.000    0.000    0.000    0.000 {range}

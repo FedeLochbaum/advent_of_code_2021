@@ -1,0 +1,17 @@
+python -m cProfile advent_of_code_2021/challenges/Day\ 6:\ Lanternfish/lanternfish.py
+345793
+1572643095893
+         2207 function calls (1207 primitive calls) in 0.001 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.001    0.001 lanternfish.py:1(<module>)
+      300    0.000    0.000    0.000    0.000 lanternfish.py:14(<lambda>)
+      300    0.000    0.000    0.000    0.000 lanternfish.py:15(<lambda>)
+ 1600/600    0.000    0.000    0.000    0.000 lanternfish.py:6(fishes_in_days)
+        2    0.000    0.000    0.001    0.000 {_functools.reduce}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 {method 'readline' of 'file' objects}
+        1    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {open}
