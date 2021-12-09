@@ -38,3 +38,48 @@
 # 5 -> [2, 3, 5]
 # 6 -> [0, 6, 9]
 # 7 -> [8]
+
+veo
+
+4 - acedgfb => es equivalente a abcdefg
+3 - dab => es equivalente a acf
+2 - eafb => es equivalente a bcdf
+1 - ab =>  es equivalente a cf
+
+de esto deberia deducir que { A = C, B = F, C = G, D = A, E = B, F = D, G = E } 
+
+veo gcdfa => egadc -> ordenaddo seria acdeg que es 2
+veo cefabd => gbdcfa -> ordenaddo seria abcdfg que es 9
+veo acedgfb => cgbaedf -> ordenaddo seria abcdefg
+
+: F
+De 1, tengo doss deducciones, con contraints = [], se llama recursivamente dos veces sacando este value y pasando cada una como una constraint
+  _A = C y _B = F          o              _A = F, _B = C
+
+
+De 3, 
+
+_D = A y _A = C Y _B = F (me quedo con esta, que es la que mas se asemeja)      o  _D = C y _A = A Y _B = F (genera un clash)
+
+De 2, 
+
+tengo la constraint de que [_A = C, _B = F, _D = A ], entonces 
+                  _E = B y _F = _D             o              _F = B y _E = D (este clashea en algun momeento)
+
+me quedo con el primero
+
+De 4, tengo [_A = C, _B = F, _D = A, _E = B, _F = _D]
+removiendo esos id de la cadena me queda
+cg => o _C = C y _G = E ó _G = C y _C = E
+
+quedá la segunda  ( _G = C y _C = E )
+
+  # index = {
+  # 'a': 'c',
+  # 'b': 'f',
+  # 'c': 'g',
+  # 'd': 'a',
+  # 'e': 'b',
+  # 'f': 'd',
+  # 'g': 'e'
+  # }
