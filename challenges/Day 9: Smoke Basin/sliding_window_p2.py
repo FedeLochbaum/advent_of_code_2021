@@ -13,5 +13,6 @@ def is_minimal(r, c, num):
 
 for r, row in enumerate(input):
   for c, num in enumerate(input[r]):
+    # TODO: Avoid this, is simplier, doing only one time bfs/dfs the tagging the component must be enough
     if(is_minimal(r, c, num)): basins.append(len(connected_component(input, [r, c])))
 print(math.prod(sorted(basins, reverse=True)[:3]))
