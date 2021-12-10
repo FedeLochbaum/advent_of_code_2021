@@ -1,9 +1,8 @@
-input_path = 'advent_of_code_2021/challenges/Day 9: Smoke Basin/input'
-from utils import dict_from_file
-window_points = lambda r, c: [[r, c-1], [r-1, c], [r, c+1], [r+1, c]]
+input_path = 'advent_of_code_2021/challenges/Day 9: Smoke Basin/test'
+from utils import dict_from_file, window_points
 input = dict_from_file(input_path)
-ROWS, COLUMNS = 99, 99
-minimals = []
+ROWS, COLUMNS = 4, 9
+low_points = []
 
 def is_minimal(r, c, num):
   for _r, _c in window_points(r, c):
@@ -13,5 +12,5 @@ def is_minimal(r, c, num):
 
 for r, row in enumerate(input):
   for c, num in enumerate(input[r]):
-    if(is_minimal(r, c, num)): minimals.append(int(num) + 1)
-print(sum(minimals))
+    if(is_minimal(r, c, num)): low_points.append(int(num) + 1)
+print(sum(low_points))

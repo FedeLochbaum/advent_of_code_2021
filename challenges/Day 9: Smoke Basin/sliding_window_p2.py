@@ -1,12 +1,9 @@
 input_path = 'advent_of_code_2021/challenges/Day 9: Smoke Basin/input'
-from utils import dict_from_file
-# window_points = lambda r, c: [[r, c-1], [r-1, c-1], [r-1, c], [r-1, c+1], [r, c+1], [r+1, c+1], [r+1, c], [r+1, c-1]]
-window_points = lambda r, c: [[r, c-1], [r-1, c], [r, c+1], [r+1, c]]
+from utils import dict_from_file, window_points, connected_component
+import math
 input = dict_from_file(input_path)
 ROWS, COLUMNS = 99, 99
-minimals = []
-
-# Los low point de 9 no cuentan
+basins = []
 
 def is_minimal(r, c, num):
   for _r, _c in window_points(r, c):
@@ -16,5 +13,5 @@ def is_minimal(r, c, num):
 
 for r, row in enumerate(input):
   for c, num in enumerate(input[r]):
-    if(is_minimal(r, c, num)): minimals.append(int(num) + 1)
-print(sum(minimals))
+    if(is_minimal(r, c, num)): basins.append(len(connected_component(input, [r, c])))
+print(math.prod(sorted(basins, reverse=True)[:3]))
