@@ -1,14 +1,12 @@
 input_path = 'advent_of_code_2021/challenges/Day 10: Syntax Scoring/input'
 from collections import deque
+from functools import reduce
 open_delimiters = ['(', '[', '{', '<']
 delimiters = { '(': ')', '[': ']', '{': '}', '<': '>' }
 points_by_end_delimiter = { ')': 3, ']': 57, '}': 1197, '>': 25137 }
 points_by_delimiter = { '(': 1, '[': 2, '{': 3, '<': 4 }
 
-def stack_score(stack):
-  score = 0
-  while(len(stack) != 0): score = ((score or 0) * 5) + points_by_delimiter[stack.pop()]
-  return score
+def stack_score(stack): return reduce(lambda score, delimiter: (score * 5) + points_by_delimiter[delimiter], list(stack)[::-1], 0)
 
 corrupted_score = 0
 incomplete_scores = []
