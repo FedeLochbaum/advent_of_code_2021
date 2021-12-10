@@ -8,6 +8,7 @@ with open(input_path) as f:
     sustitution = unify(patterns.split(' '))
     pattern_value = 0
     values = values.split(' ')
+    # This can be solved transforming the constrains into a SAT problem
     for i, value in enumerate(values):
       pattern_value += number_by_digitis[sustitution(value)] * 10**(len(values) - i - 1)
     sum += pattern_value
