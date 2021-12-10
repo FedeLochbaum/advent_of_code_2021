@@ -1,0 +1,19 @@
+python -m cProfile advent_of_code_2021/challenges/Day\ 10:\ Syntax\ Scoring/catalan_balance.py
+         9802 function calls in 0.006 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.003    0.003    0.006    0.006 catalan_balance.py:1(<module>)
+       51    0.000    0.000    0.000    0.000 catalan_balance.py:8(stack_score)
+        1    0.001    0.001    0.002    0.002 collections.py:11(<module>)
+        1    0.000    0.000    0.000    0.000 collections.py:38(OrderedDict)
+        1    0.000    0.000    0.000    0.000 collections.py:407(Counter)
+        1    0.001    0.001    0.001    0.001 heapq.py:31(<module>)
+        1    0.000    0.000    0.000    0.000 keyword.py:11(<module>)
+      833    0.000    0.000    0.000    0.000 {len}
+     4764    0.000    0.000    0.000    0.000 {method 'append' of 'collections.deque' objects}
+       51    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+     4095    0.000    0.000    0.000    0.000 {method 'pop' of 'collections.deque' objects}
+        1    0.000    0.000    0.000    0.000 {open}
