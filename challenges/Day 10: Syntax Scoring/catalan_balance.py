@@ -6,7 +6,7 @@ delimiters = { '(': ')', '[': ']', '{': '}', '<': '>' }
 points_by_end_delimiter = { ')': 3, ']': 57, '}': 1197, '>': 25137 }
 points_by_delimiter = { '(': 1, '[': 2, '{': 3, '<': 4 }
 
-def stack_score(stack): return reduce(lambda score, delimiter: (score * 5) + points_by_delimiter[delimiter], list(stack)[::-1], 0)
+stack_score = lambda stack: reduce(lambda score, delimiter: (score * 5) + points_by_delimiter[delimiter], list(stack)[::-1], 0)
 
 corrupted_score = 0
 incomplete_scores = []
