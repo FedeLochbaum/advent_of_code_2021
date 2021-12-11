@@ -1,6 +1,5 @@
 input_path = 'advent_of_code_2021/challenges/Day 11: Dumbo Octopus/input'
 from utils import dict_from_file, neighbors
-from collections import deque
 # Part 1
 ROWS = 9
 COLUMNS = 9
