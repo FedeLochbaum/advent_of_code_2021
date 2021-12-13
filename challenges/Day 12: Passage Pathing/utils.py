@@ -9,12 +9,20 @@ def graph_from_file(input_path):
       graph[_to].append(_from)
   return graph
 
-def find_paths(graph, _from, _to, visited, other_selected = False):
+def copy_without(visited, elem):
+  copy = visited.copy()
+  copy.remove(elem)
+  return copy
+
+def find_paths(graph, _from, _to, visited, selected):
   paths = []
-  if (_from.islower()): visited.add(_from)
   if _from == _to: return [_to]
+  if (_from.islower()): visited.add(_from)
 
   # TODO: Move to use a queue
   for neighbor in graph[_from]:
-    paths = find_paths(graph, neighbor, _to, visited.copy()) + paths if neighbor not in visited else paths
+    if (neighbor not in visited):
+      paths = find_paths(graph, neighbor, _to, visited.copy(), selected) + paths
+
+    # paths = find_paths(graph, neighbor, _to, copy_without(visited, _from), True) if (other_selected == False and _from.islower() and _from != 'start') else paths
   return paths
