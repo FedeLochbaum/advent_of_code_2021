@@ -12,15 +12,12 @@ def graph_from_file(input_path):
 def bfs_paths(graph, _from, _to, visited_small_keys):
   paths = []
   if (_from.islower()): visited_small_keys.add(_from)
-  if _from == _to: return [[_to]]
+  if _from == _to: return [_to]
 
   # TODO: Move to use a queue
   for neighbor in graph[_from]:
     if neighbor not in visited_small_keys:
-      sub_paths = bfs_paths(graph, neighbor, _to, visited_small_keys.copy())
-      for path in sub_paths:
-        path.append(_from)
-        if (len(path) > 0): paths.append(path)
+      paths = paths + bfs_paths(graph, neighbor, _to, visited_small_keys.copy())
   return paths
 
 find_paths = bfs_paths
