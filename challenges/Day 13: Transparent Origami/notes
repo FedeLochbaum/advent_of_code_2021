@@ -5,7 +5,7 @@ python3 -m cProfile advent_of_code_2021/challenges/Day\ 13:\ Transparent\ Origam
 #....###..#.......#.#..#....#.#....#..#.
 #....#.#..#....#..#.#..#.#..#.#....#..#.
 ####.#..#.#.....##..###...##..####.#..#.
-         6278 function calls (6277 primitive calls) in 0.270 seconds
+         4555 function calls (4554 primitive calls) in 0.225 seconds
 
    Ordered by: standard name
 
@@ -17,10 +17,10 @@ python3 -m cProfile advent_of_code_2021/challenges/Day\ 13:\ Transparent\ Origam
         2    0.000    0.000    0.000    0.000 enum.py:289(__call__)
         2    0.000    0.000    0.000    0.000 enum.py:580(__new__)
         1    0.000    0.000    0.000    0.000 enum.py:852(__and__)
-        1    0.001    0.001    0.314    0.314 folding.py:1(<module>)
-        5    0.203    0.041    0.203    0.041 folding.py:13(fold_vertical)
-        1    0.001    0.001    0.046    0.046 folding.py:5(<listcomp>)
-        7    0.063    0.009    0.063    0.009 folding.py:7(fold_horizontal)
+        1    0.001    0.001    0.268    0.268 folding.py:1(<module>)
+        5    0.163    0.033    0.163    0.033 folding.py:12(fold_vertical)
+        1    0.001    0.001    0.044    0.044 folding.py:4(<listcomp>)
+        7    0.059    0.008    0.059    0.008 folding.py:6(fold_horizontal)
       864    0.000    0.000    0.001    0.000 re.py:188(match)
       864    0.000    0.000    0.001    0.000 re.py:289(_compile)
         1    0.000    0.000    0.000    0.000 sre_compile.py:432(_generate_overlap_table)
@@ -50,10 +50,10 @@ python3 -m cProfile advent_of_code_2021/challenges/Day\ 13:\ Transparent\ Origam
         2    0.000    0.000    0.000    0.000 {built-in method _codecs.utf_8_decode}
         1    0.000    0.000    0.000    0.000 {built-in method _locale.nl_langinfo}
         1    0.000    0.000    0.000    0.000 {built-in method _sre.compile}
-        1    0.000    0.000    0.314    0.314 {built-in method builtins.exec}
+        1    0.000    0.000    0.268    0.268 {built-in method builtins.exec}
       881    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
     25/24    0.000    0.000    0.000    0.000 {built-in method builtins.len}
-     1738    0.000    0.000    0.000    0.000 {built-in method builtins.min}
+       15    0.000    0.000    0.000    0.000 {built-in method builtins.min}
        11    0.000    0.000    0.000    0.000 {built-in method builtins.ord}
         6    0.000    0.000    0.000    0.000 {built-in method builtins.print}
         1    0.000    0.000    0.000    0.000 {built-in method io.open}

@@ -10,11 +10,11 @@ def fold_horizontal(n):
   del matrix[n:ROW]
 
 def fold_vertical(n):
-  for r, _ in enumerate(matrix):
-    for col in range(n + 1, min(COL, ((n+1) * 2) - 1)):
-      _col = n - (col - n)
+  for col in range(n + 1, min(COL, ((n+1) * 2) - 1)):
+    _col = n - (col - n)
+    for r, _ in enumerate(matrix):
       matrix[r][_col] = '#' if (matrix[r][col] == '#') else matrix[r][_col]
-    del matrix[r][n:COL]
+  for row in matrix: del row[n:COL]
 
 with open(input_path) as f:
   for line in f:
