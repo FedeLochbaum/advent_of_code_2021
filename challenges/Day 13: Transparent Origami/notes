@@ -5,7 +5,7 @@ python3 -m cProfile advent_of_code_2021/challenges/Day\ 13:\ Transparent\ Origam
 #....###..#.......#.#..#....#.#....#..#.
 #....#.#..#....#..#.#..#.#..#.#....#..#.
 ####.#..#.#.....##..###...##..####.#..#.
-         4555 function calls (4554 primitive calls) in 0.225 seconds
+         7688 function calls (7687 primitive calls) in 0.108 seconds
 
    Ordered by: standard name
 
@@ -17,10 +17,11 @@ python3 -m cProfile advent_of_code_2021/challenges/Day\ 13:\ Transparent\ Origam
         2    0.000    0.000    0.000    0.000 enum.py:289(__call__)
         2    0.000    0.000    0.000    0.000 enum.py:580(__new__)
         1    0.000    0.000    0.000    0.000 enum.py:852(__and__)
-        1    0.001    0.001    0.268    0.268 folding.py:1(<module>)
-        5    0.163    0.033    0.163    0.033 folding.py:12(fold_vertical)
-        1    0.001    0.001    0.044    0.044 folding.py:4(<listcomp>)
-        7    0.059    0.008    0.059    0.008 folding.py:6(fold_horizontal)
+        1    0.002    0.002    0.108    0.108 folding.py:1(<module>)
+        5    0.080    0.016    0.082    0.016 folding.py:15(fold_vertical)
+        1    0.001    0.001    0.001    0.001 folding.py:4(<listcomp>)
+     3133    0.003    0.000    0.003    0.000 folding.py:6(replace_index)
+        7    0.020    0.003    0.021    0.003 folding.py:8(fold_horizontal)
       864    0.000    0.000    0.001    0.000 re.py:188(match)
       864    0.000    0.000    0.001    0.000 re.py:289(_compile)
         1    0.000    0.000    0.000    0.000 sre_compile.py:432(_generate_overlap_table)
@@ -50,7 +51,7 @@ python3 -m cProfile advent_of_code_2021/challenges/Day\ 13:\ Transparent\ Origam
         2    0.000    0.000    0.000    0.000 {built-in method _codecs.utf_8_decode}
         1    0.000    0.000    0.000    0.000 {built-in method _locale.nl_langinfo}
         1    0.000    0.000    0.000    0.000 {built-in method _sre.compile}
-        1    0.000    0.000    0.268    0.268 {built-in method builtins.exec}
+        1    0.000    0.000    0.108    0.108 {built-in method builtins.exec}
       881    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
     25/24    0.000    0.000    0.000    0.000 {built-in method builtins.len}
        15    0.000    0.000    0.000    0.000 {built-in method builtins.min}
