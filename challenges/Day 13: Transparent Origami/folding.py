@@ -1,7 +1,6 @@
 input_path = 'advent_of_code_2021/challenges/Day 13: Transparent Origami/input'
 import re
 ROW = 892; COL = 1310
-sum = 0
 matrix = [['.' for _ in range(COL)] for _ in range(ROW)]
 
 def fold_horizontal(n):
