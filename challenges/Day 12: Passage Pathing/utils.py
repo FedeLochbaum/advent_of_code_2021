@@ -15,14 +15,16 @@ def copy_without(visited, elem):
   return copy
 
 def find_paths(graph, _from, _to, visited, selected):
-  paths = []
+  paths = set()
   if _from == _to: return [_to]
-  if (_from.islower()): visited.add(_from)
+  if (_from.islower()): visited = visited.copy(); visited.add(_from)
 
   # TODO: Move to use a queue
   for neighbor in graph[_from]:
     if (neighbor not in visited):
-      paths = find_paths(graph, neighbor, _to, visited.copy(), selected) + paths
-
-    # paths = find_paths(graph, neighbor, _to, copy_without(visited, _from), True) if (other_selected == False and _from.islower() and _from != 'start') else paths
+      for path in find_paths(graph, neighbor, _to, visited, selected):
+        paths.add(_from + path)
+      if selected == None and _from.islower() and _from != 'start':
+        for path in find_paths(graph, neighbor, _to, copy_without(visited, _from), _from):
+          paths.add(_from + path)
   return paths
