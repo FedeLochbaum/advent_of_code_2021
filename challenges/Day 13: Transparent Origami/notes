@@ -1,0 +1,67 @@
+python3 -m cProfile advent_of_code_2021/challenges/Day\ 13:\ Transparent\ Origami/folding.py
+#....###..####...##.###....##.####.#..#.
+#....#..#.#.......#.#..#....#.#....#..#.
+#....#..#.###.....#.###.....#.###..####.
+#....###..#.......#.#..#....#.#....#..#.
+#....#.#..#....#..#.#..#.#..#.#....#..#.
+####.#..#.#.....##..###...##..####.#..#.
+         6278 function calls (6277 primitive calls) in 0.270 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 _bootlocale.py:33(getpreferredencoding)
+        1    0.000    0.000    0.000    0.000 codecs.py:260(__init__)
+        1    0.000    0.000    0.000    0.000 codecs.py:309(__init__)
+        2    0.000    0.000    0.000    0.000 codecs.py:319(decode)
+        2    0.000    0.000    0.000    0.000 enum.py:289(__call__)
+        2    0.000    0.000    0.000    0.000 enum.py:580(__new__)
+        1    0.000    0.000    0.000    0.000 enum.py:852(__and__)
+        1    0.001    0.001    0.314    0.314 folding.py:1(<module>)
+        5    0.203    0.041    0.203    0.041 folding.py:13(fold_vertical)
+        1    0.001    0.001    0.046    0.046 folding.py:5(<listcomp>)
+        7    0.063    0.009    0.063    0.009 folding.py:7(fold_horizontal)
+      864    0.000    0.000    0.001    0.000 re.py:188(match)
+      864    0.000    0.000    0.001    0.000 re.py:289(_compile)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:432(_generate_overlap_table)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:453(_get_iscased)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:461(_get_literal_prefix)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:536(_compile_info)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:595(isstring)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:598(_code)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:71(_compile)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:759(compile)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:111(__init__)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:160(__len__)
+       11    0.000    0.000    0.000    0.000 sre_parse.py:164(__getitem__)
+       11    0.000    0.000    0.000    0.000 sre_parse.py:172(append)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:174(getwidth)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:224(__init__)
+       12    0.000    0.000    0.000    0.000 sre_parse.py:233(__next)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:249(match)
+       11    0.000    0.000    0.000    0.000 sre_parse.py:254(get)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:286(tell)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:435(_parse_sub)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:493(_parse)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:76(__init__)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:81(groups)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:921(fix_flags)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:937(parse)
+        2    0.000    0.000    0.000    0.000 {built-in method _codecs.utf_8_decode}
+        1    0.000    0.000    0.000    0.000 {built-in method _locale.nl_langinfo}
+        1    0.000    0.000    0.000    0.000 {built-in method _sre.compile}
+        1    0.000    0.000    0.314    0.314 {built-in method builtins.exec}
+      881    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+    25/24    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+     1738    0.000    0.000    0.000    0.000 {built-in method builtins.min}
+       11    0.000    0.000    0.000    0.000 {built-in method builtins.ord}
+        6    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+        1    0.000    0.000    0.000    0.000 {built-in method io.open}
+        1    0.000    0.000    0.000    0.000 {method '__exit__' of '_io._IOBase' objects}
+       53    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        2    0.000    0.000    0.000    0.000 {method 'extend' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+        6    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+      864    0.000    0.000    0.000    0.000 {method 'match' of 're.Pattern' objects}
+      864    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
