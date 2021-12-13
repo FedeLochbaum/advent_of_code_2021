@@ -3,4 +3,3 @@ from utils import graph_from_file, find_paths
 
 graph = graph_from_file(input_path)
 print(len(find_paths(graph, 'start', 'end', set(), None)))
-# 92111

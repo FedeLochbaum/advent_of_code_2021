@@ -22,9 +22,9 @@ def find_paths(graph, _from, _to, visited, selected):
   # TODO: Move to use a queue
   for neighbor in graph[_from]:
     if (neighbor not in visited):
-      for path in find_paths(graph, neighbor, _to, visited, selected):
-        paths.add(_from + path)
       if selected == None and _from.islower() and _from != 'start':
         for path in find_paths(graph, neighbor, _to, copy_without(visited, _from), _from):
           paths.add(_from + path)
+      for path in find_paths(graph, neighbor, _to, visited, selected):
+        paths.add(_from + path)
   return paths
