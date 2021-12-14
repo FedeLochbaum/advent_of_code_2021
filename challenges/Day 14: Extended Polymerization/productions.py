@@ -6,15 +6,15 @@ steps = 10
 def add_at_index(str, index, replacement=''): return '%s%s%s'%(str[:index], replacement, str[index:])
 
 def prod(string):
-  i = 0; j = 1 # iterators
-  while (j <= len(string)):
-    current = string[i:j+1]
+  i = 0 # iterators
+  while (i+1 <= len(string)):
+    current = string[i:i+2]
     if(current in productions):
       char = productions[current]
       count[char] = count[char] + 1 if char in count else 1
-      string = add_at_index(string, j, char)
-      i+=1; j+=1
-    i+=1; j+=1
+      string = add_at_index(string, i+1, char)
+      i+=1
+    i+=1
   return string
 
 with open(input_path) as f:
