@@ -1,13 +1,17 @@
-input_path = 'advent_of_code_2021/challenges/Day 14: Extended Polymerization/test'
+input_path = 'advent_of_code_2021/challenges/Day 14: Extended Polymerization/input'
+from collections import deque
 productions = {}
 memoization = {}
-steps = 10
+pairs_memo = {}
+steps = 30
 
 def pairs(string):
-  array = []; j = 0
-  while (j+1 < len(string)):
-    array.append(string[j:j+2]); j+=1
-  return array
+  if not string in pairs_memo:
+    array = []; j = 0
+    while (j+1 < len(string)):
+      array.append(string[j:j+2]); j+=1
+    pairs_memo[string] = array
+  return pairs_memo[string]
 
 string = ''
 count = {}
@@ -18,18 +22,28 @@ def produce_pattern(pattern, count):
   count[productions[pattern]] +=1
   return pattern[0] + productions[pattern] + pattern[1]
 
-def produce(string, steps):
-  if (steps == 0): return
-  if(string in memoization):
-    _count, sub_strings = memoization[string]
-    for char in _count: count[char] = _count[char] + (count[char] if char in count else 0)
-    for sub_string in sub_strings: produce(sub_string, steps - 1)
-  else:
+def step(string):
+  if(not string in memoization):
     _count = {}
     sub_strings = list(map(lambda pattern: produce_pattern(pattern, _count), pairs(string)))
     memoization[string] = _count, sub_strings
-    for char in _count: count[char] = _count[char] + (count[char] if char in count else 0)
-    for sub_string in sub_strings: produce(sub_string, steps - 1)
+
+  __count, sub_strings = memoization[string]
+  for char in __count: count[char] = __count[char] + (count[char] if char in count else 0)
+  return sub_strings
+
+def produce(s, steps):
+  next = deque()
+  next.append(s)
+  for i in range(steps):
+    print(i)
+    queue = next
+    next = deque()
+    while(queue):
+      current = queue.popleft()
+      sub_strings = step(current)
+      for sub_string in sub_strings:
+        next.append(sub_string)
 
 with open(input_path) as f:
   for i, line in enumerate(f):
