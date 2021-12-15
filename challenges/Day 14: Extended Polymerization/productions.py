@@ -1,9 +1,7 @@
 input_path = 'advent_of_code_2021/challenges/Day 14: Extended Polymerization/test'
 productions = {}
-count = {}
 memoization = {} # sub_string => counts
-string = []
-steps = 25
+steps = 10
 def add_at_index(str, index, replacement=''): return '%s%s%s'%(str[:index], replacement, str[index:])
 
 def pairs(string):
@@ -12,24 +10,34 @@ def pairs(string):
     array.append(string[j:j+2]); j+=1
   return array
 
-def step_pattern(pattern):
-  if (pattern in productions):
-    char = productions[pattern]
-    return { char: 1 }, pattern[0] + char + pattern[1]
+string = ''
+count = {}
 
-def prod_and_count_pairs(patterns, steps):
-  count = {}
-  if (steps > 0):
-    for pattern in patterns:
-      _count, sub_string = memoization[pattern] if pattern in memoization else step_pattern(pattern)
-      __count = prod_and_count(sub_string, steps-1)
-      for char in _count: count[char] = _count[char] + (count[char] if char in count else 0)
-      for char in __count: count[char] = __count[char] + (count[char] if char in count else 0)
-  return count
+def produce_pattern(pattern, count):
+  if (not pattern in memoization):
+    if (pattern in productions):
+      char = productions[pattern]
+      memoization[pattern] = { char: 1 }, pattern[0] + char + pattern[1]
+  
+  if (not pattern in productions): return pattern
 
-def prod_and_count(_string, steps):
-  return prod_and_count_pairs(pairs(_string), steps)
-    
+  _count, s = memoization[pattern]
+  for char in _count: count[char] = _count[char] + (count[char] if char in count else 0)
+  return s
+
+def produce(string, steps):
+  if (steps == 0): return
+  if(string in memoization):
+    _count, sub_strings = memoization[string]
+    for char in _count: count[char] = _count[char] + (count[char] if char in count else 0)
+    for sub_string in sub_strings: produce(sub_string, steps - 1)
+  else:
+    _count = {}
+    sub_strings = list(map(lambda pattern: produce_pattern(pattern, _count), pairs(string)))
+    memoization[string] = _count, sub_strings
+    for char in _count: count[char] = _count[char] + (count[char] if char in count else 0)
+    for sub_string in sub_strings: produce(sub_string, steps - 1)
+
 with open(input_path) as f:
   for i, line in enumerate(f):
     if i == 0:
@@ -39,7 +47,6 @@ with open(input_path) as f:
       pattern, production = line[:-1].split(' -> ')
       productions[pattern] = production
 
-_count = prod_and_count(string, steps)
-for char in _count: count[char] = _count[char] + (count[char] if char in count else 0)
-
+produce(string, steps)
 print(count)
+# print(memoization)
