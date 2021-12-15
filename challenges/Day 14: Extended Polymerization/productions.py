@@ -1,8 +1,7 @@
 input_path = 'advent_of_code_2021/challenges/Day 14: Extended Polymerization/test'
 productions = {}
-memoization = {} # sub_string => counts
+memoization = {}
 steps = 10
-def add_at_index(str, index, replacement=''): return '%s%s%s'%(str[:index], replacement, str[index:])
 
 def pairs(string):
   array = []; j = 0
@@ -14,16 +13,10 @@ string = ''
 count = {}
 
 def produce_pattern(pattern, count):
-  if (not pattern in memoization):
-    if (pattern in productions):
-      char = productions[pattern]
-      memoization[pattern] = { char: 1 }, pattern[0] + char + pattern[1]
-  
   if (not pattern in productions): return pattern
-
-  _count, s = memoization[pattern]
-  for char in _count: count[char] = _count[char] + (count[char] if char in count else 0)
-  return s
+  if (not productions[pattern] in count): count[productions[pattern]] = 0
+  count[productions[pattern]] +=1
+  return pattern[0] + productions[pattern] + pattern[1]
 
 def produce(string, steps):
   if (steps == 0): return
