@@ -33,7 +33,8 @@ with open(input_path) as f:
     if i == 0:
       for char in line[:-1]: count[char] = count[char] + 1 if char in count else 1
       for pair in pairs(line[:-1]):
-        indexed_pairs[pair] = 1
+        if (not pair in indexed_pairs): indexed_pairs[pair] = 0
+        indexed_pairs[pair] += 1
     if (i > 1):
       pattern, production = line[:-1].split(' -> ')
       productions[pattern] = production

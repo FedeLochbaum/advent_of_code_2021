@@ -1,0 +1,28 @@
+python3 -m cProfile advent_of_code_2021/challenges/Day\ 14:\ Extended\ Polymerization/productions.py                                       
+3941782230241
+         199 function calls in 0.003 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 _bootlocale.py:33(getpreferredencoding)
+        1    0.000    0.000    0.000    0.000 codecs.py:260(__init__)
+        1    0.000    0.000    0.000    0.000 codecs.py:309(__init__)
+        2    0.000    0.000    0.000    0.000 codecs.py:319(decode)
+        1    0.000    0.000    0.003    0.003 productions.py:1(<module>)
+        1    0.003    0.003    0.003    0.003 productions.py:13(produce)
+        1    0.000    0.000    0.000    0.000 productions.py:5(pairs)
+        2    0.000    0.000    0.000    0.000 {built-in method _codecs.utf_8_decode}
+        1    0.000    0.000    0.000    0.000 {built-in method _locale.nl_langinfo}
+        1    0.000    0.000    0.003    0.003 {built-in method builtins.exec}
+       20    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.max}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.min}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+        1    0.000    0.000    0.000    0.000 {built-in method io.open}
+        1    0.000    0.000    0.000    0.000 {method '__exit__' of '_io._IOBase' objects}
+       19    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+       40    0.000    0.000    0.000    0.000 {method 'copy' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+      100    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 {method 'values' of 'dict' objects}
