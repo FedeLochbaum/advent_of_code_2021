@@ -33,10 +33,10 @@ def velocity_in_in_range(x, y):
 is_in_diameter_y = lambda y: is_in_diameter(y, step_y, y_min, y_max, lambda y, pos: pos < int(y_min) and y < 0)
 
 # Part 1
-print(binary_search_velocity_y(0, 1000, is_in_diameter_y))  # 5253
+print(binary_search_velocity_y(0, 500, is_in_diameter_y))
 # Part 2
-_range = range(min(int(x_min), int(y_min)) - 1, max(int(x_max), int(y_max)) + 1)
-for x in _range:
-  for y in _range:
+# TODO: use binary search to find the optimal min, max for each axis
+for x in range(0,  int(x_max) + 1):
+  for y in range(int(y_min), max(int(x_max), int(y_max)) + 1):
     if(velocity_in_in_range(x, y)): all.add((x, y))
 print(len(all))
