@@ -37,7 +37,10 @@ def reduce(pair):
   if (any_literal_to_divide(pair)): return reduce(divide_child(pair))
   return pair
 
-with open(input_path) as f:
-  current = parse_tree(f.readline()[:-1])
-  for line in f: current = add(current, parse_tree(line[:-1]))
-  print(magnitude(current))
+# with open(input_path) as f:
+#   current = parse_tree(f.readline()[:-1])
+#   for line in f: current = add(current, parse_tree(line[:-1]))
+#   print(magnitude(current))
+
+
+reduce(parse_tree('[[[[0,7],4],[7,[[8,4],9]]],[1,1]]'))

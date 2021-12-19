@@ -9,7 +9,15 @@ tree = lambda left, right, parent = None: { 'type': PAIR, 'left': left, 'right':
 is_leaf = lambda pair: pair['type'] == LEAF
 is_pair = lambda pair: pair['type'] == PAIR
 
-parse_literal_pair = lambda val: tree(parse_literal_pair(val[0]), parse_literal_pair(val[1])) if type(val) == list else leaf(val)
+def parse_literal_pair(val):
+  if type(val) == list:
+    left = parse_literal_pair(val[0])
+    right = parse_literal_pair(val[1])
+    t = tree(left, right)
+    left['parent'] = t
+    right['parent'] = t
+    return t
+  return leaf(val)
 parse_tree = lambda str: parse_literal_pair(literal_eval(str))
 
 def as_list(t):
@@ -31,26 +39,14 @@ def find_to_divide(current):
   if(is_leaf(current) and current['value'] > 9): return current
   
   if(is_pair(current)):
-
-    l_child = find_to_divide(current['left'])
-    if (l_child != None): return l_child
-
-    r_child = find_to_divide(current['right'])
-    if (l_child != None): return r_child
-
+    return find_to_divide(current['left']) or find_to_divide(current['right'])
   return None
 
 def find_to_explode(parent, level = 0):
+  if (level == 4 and is_pair(parent)): return parent
 
   if(is_pair(parent)):
-    if (level == 5): return parent
-
-    l_child = find_to_explode(parent['left'], level + 1)
-    if (l_child != None): return l_child
-
-    r_child = find_to_explode(parent['right'], level + 1)
-    if (l_child != None): return r_child
-
+    return find_to_explode(parent['left'], level + 1) or find_to_explode(parent['right'], level + 1)
   return None
 
 def find_left_leaf(node, level = 0):
