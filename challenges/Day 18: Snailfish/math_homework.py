@@ -1,5 +1,5 @@
 input_path = 'advent_of_code_2021/challenges/Day 18: Snailfish/test1'
-from tree import tree, leaf, is_leaf, parse_tree, replace_node, find_to_explode, find_to_divide, any_literal_to_divide, find_right_leaf, find_left_leaf, as_list
+from tree import tree, leaf, is_leaf, parse_tree, replace_node, find_to_explode, find_to_divide, any_literal_to_divide, find_right_leaf, find_left_leaf, as_list, height
 
 magnitude = lambda pair: pair['value'] if is_leaf(pair) else 3 * magnitude(pair['left']) +  2 * magnitude(pair['right'])
 
@@ -13,9 +13,10 @@ def explode_child(parent):
   p = find_to_explode(parent)
   left = p['left']
   right = p['right']
+  l_leaf = find_left_leaf(p, 0)
+  r_leaf = find_right_leaf(p, 0)
+
   replace_node(p, leaf(0))
-  l_leaf = find_left_leaf(parent, 0) # len(path)
-  r_leaf = find_right_leaf(parent, 0)
   if(l_leaf != None): l_leaf['value'] += left['value']
   if (r_leaf != None): r_leaf['value'] += right['value']
 
@@ -32,7 +33,8 @@ def divide_child(_tree):
   return _tree
 
 def reduce(pair):
-  if (pair['height'] == 5):
+  print('reduce: ', as_list(pair))
+  if (height(pair) == 5):
     return reduce(explode_child(pair))
   if (any_literal_to_divide(pair)): return reduce(divide_child(pair))
   return pair

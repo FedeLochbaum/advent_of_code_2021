@@ -4,10 +4,12 @@ from ast import literal_eval
 LEAF = 'LEAF'
 PAIR = 'PAIR'
 
-leaf = lambda value, parent = None: { 'type': LEAF, 'value': value, 'height': 0, 'parent': parent }
-tree = lambda left, right, parent = None: { 'type': PAIR, 'left': left, 'right': right, 'height': max(left['height'], right['height']) + 1, 'parent': parent }
+leaf = lambda value, parent = None: { 'type': LEAF, 'value': value, 'parent': parent }
+tree = lambda left, right, parent = None: { 'type': PAIR, 'left': left, 'right': right, 'parent': parent }
 is_leaf = lambda pair: pair['type'] == LEAF
 is_pair = lambda pair: pair['type'] == PAIR
+
+def height(t): return (0 if is_leaf(t) else max(height(t['left']), height(t['right'])) + 1)
 
 def parse_literal_pair(val):
   if type(val) == list:
@@ -33,7 +35,6 @@ def replace_node(to_replace, new_tree):
   new_tree['parent'] = parent
   if (parent['left'] == to_replace): parent['left'] = new_tree
   else: parent['right'] = new_tree
-  parent['height'] = max(parent['left']['height'], parent['right']['height']) + 1
 
 def find_to_divide(current):
   if(is_leaf(current) and current['value'] > 9): return current
@@ -54,27 +55,28 @@ def find_left_leaf(node, level = 0):
 
   while (node['parent']['left'] == node or (node['parent']['left'] == None and node['parent']['right'] == node)):
     if (node['parent'] == None): return None
-
     node = node['parent']
     level -= 1
 
   node = node['parent']['left']
 
   while (level < 0):
+    if is_leaf(node): level += 1; break
     if (node['right'] != None): node = node['right']
     elif (node['left'] != None): node = node['left']
-    else: break
     level += 1
 
   if (level == 0): return node
 
-  return find_right_leaf(node, level)
+  return find_left_leaf(node, level)
 
 def find_right_leaf(node, level = 0):
-  if (node == None or node['parent'] == None): return None
+  if (node == None or node['parent'] == None):
+    return None
 
   while (node['parent']['right'] == node or (node['parent']['right'] == None and node['parent']['left'] == node)):
-    if (node['parent'] == None): return None
+    if (node['parent'] == None):
+      return None
 
     node = node['parent']
     level -= 1
