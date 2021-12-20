@@ -8,18 +8,18 @@ def add(pair1, pair2):
   return reduce(_tree)
 
 def explode_child(_tree):
-  p = find_to_explode(_tree)
-  l_leaf = find_left_leaf(p)
-  r_leaf = find_right_leaf(p, -1)
-  if(l_leaf != None): l_leaf['value'] += p['left']['value']
-  if (r_leaf != None): r_leaf['value'] += p['right']['value']
-  replace_node(p, leaf(0))
+  pair = find_to_explode(_tree)
+  l_leaf = find_left_leaf(pair)
+  r_leaf = find_right_leaf(pair, -1)
+  if(l_leaf != None): l_leaf['value'] += pair['left']['value']
+  if (r_leaf != None): r_leaf['value'] += pair['right']['value']
+  replace_node(pair, leaf(0))
   return _tree
 
 def divide_child(_tree):
-  l = find_to_divide(_tree)
-  value = l['value']
-  replace_node(l, tree(leaf(value//2), leaf(value//2 + (value % 2))))
+  _leaf = find_to_divide(_tree)
+  value = _leaf['value']
+  replace_node(_leaf, tree(leaf(value//2), leaf(value//2 + (value % 2))))
   return _tree
 
 def reduce(_tree):
