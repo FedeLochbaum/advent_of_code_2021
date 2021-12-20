@@ -1,5 +1,5 @@
 input_path = 'advent_of_code_2021/challenges/Day 18: Snailfish/input'
-from tree import tree, leaf, is_leaf, parse_tree, replace_node, find_to_explode, find_to_divide, any_literal_to_divide, find_right_leaf, find_left_leaf, height, magnitude
+from tree import tree, leaf, is_leaf, parse_tree, replace_node, find_to_explode, find_to_divide, any_literal_to_divide, find_right_leaf, find_left_leaf, as_list, height, magnitude
 
 def add(pair1, pair2):
   _tree = tree(pair1, pair2)
@@ -32,8 +32,22 @@ def reduce(_tree):
   if (any_literal_to_divide(_tree)): return reduce(divide_child(_tree))
   return _tree
 
+numbers = []
 with open(input_path) as f:
-  _tree = parse_tree(f.readline()[:-1])
+  first_line = f.readline()[:-1]
+  _tree = parse_tree(first_line)
+  numbers.append(first_line)
   for line in f:
+    numbers.append(line[:-1])
     _tree = add(_tree, parse_tree(line[:-1]))
+  # part 1
   print(magnitude(_tree))
+
+# Part 2
+_max = 0
+for i in range(len(numbers)):
+  for j in range(i+1, len(numbers)):
+    first_magnitude = magnitude(add(parse_tree(numbers[i]), parse_tree(numbers[j])))
+    second_magnitude = magnitude(add(parse_tree(numbers[j]), parse_tree(numbers[i])))
+    _max = max(_max, max(first_magnitude, second_magnitude))
+print(_max)
