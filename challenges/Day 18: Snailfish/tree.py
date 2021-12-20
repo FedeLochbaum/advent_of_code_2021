@@ -1,91 +1,91 @@
 from ast import literal_eval
 
-LEAF = 'LEAF'
-PAIR = 'PAIR'
+LEAF = 'LEAF'; PAIR = 'PAIR'
 
-leaf = lambda value, parent = None: { 'type': LEAF, 'value': value, 'parent': parent }
-tree = lambda left, right, parent = None: { 'type': PAIR, 'left': left, 'right': right, 'parent': parent }
-is_leaf = lambda pair: pair['type'] == LEAF
-is_pair = lambda pair: pair['type'] == PAIR
-
-def height(t): return (0 if is_leaf(t) else max(height(t['left']), height(t['right'])) + 1)
+leaf = lambda value: { 'type': LEAF, 'value': value, 'parent': None }
+tree = lambda left, right: { 'type': PAIR, 'left': left, 'right': right, 'parent': None }
+is_leaf = lambda _tree: _tree['type'] == LEAF
+is_pair = lambda _tree: _tree['type'] == PAIR
+magnitude = lambda _tree: _tree['value'] if is_leaf(_tree) else 3 * magnitude(_tree['left']) +  2 * magnitude(_tree['right'])
+height = lambda _tree: 0 if is_leaf(_tree) else max(height(_tree['left']), height(_tree['right'])) + 1
 
 def parse_literal_pair(val):
   if type(val) == list:
     left = parse_literal_pair(val[0])
     right = parse_literal_pair(val[1])
-    t = tree(left, right)
-    left['parent'] = t
-    right['parent'] = t
-    return t
+    _tree = tree(left, right)
+    left['parent'] = _tree
+    right['parent'] = _tree
+    return _tree
   return leaf(val)
+
 parse_tree = lambda str: parse_literal_pair(literal_eval(str))
 
-def as_list(t):
-  if (is_leaf(t)): return t['value']
-  return [as_list(t['left']), as_list(t['right'])]
+def as_list(_tree):
+  if (is_leaf(_tree)): return _tree['value']
+  return [as_list(_tree['left']), as_list(_tree['right'])]
 
-def any_literal_to_divide(parent):
-  if (is_leaf(parent)): return parent['value'] > 9
-  return any_literal_to_divide(parent['left']) or any_literal_to_divide(parent['right'])
+def any_literal_to_divide(_tree):
+  if (is_leaf(_tree)): return _tree['value'] > 9
+  return any_literal_to_divide(_tree['left']) or any_literal_to_divide(_tree['right'])
 
 def replace_node(to_replace, new_tree):
   parent = to_replace['parent']
-  new_tree['parent'] = parent
   if (parent['left'] == to_replace): parent['left'] = new_tree
   else: parent['right'] = new_tree
+  new_tree['parent'] = parent
 
-def find_to_divide(current):
-  if(is_leaf(current) and current['value'] > 9): return current
+def find_to_divide(_tree):
+  if(is_leaf(_tree) and _tree['value'] > 9): return _tree
   
-  if(is_pair(current)):
-    return find_to_divide(current['left']) or find_to_divide(current['right'])
+  if(is_pair(_tree)):
+    return find_to_divide(_tree['left']) or find_to_divide(_tree['right'])
   return None
 
-def find_to_explode(parent, level = 0):
-  if (level == 4 and is_pair(parent)): return parent
+def find_to_explode(_tree, level = 0):
+  if (level == 4 and is_pair(_tree)): return _tree
 
-  if(is_pair(parent)):
-    return find_to_explode(parent['left'], level + 1) or find_to_explode(parent['right'], level + 1)
+  if(is_pair(_tree)):
+    return find_to_explode(_tree['left'], level + 1) or find_to_explode(_tree['right'], level + 1)
   return None
 
-def find_left_leaf(node, level = 0):
-  if (node == None or node['parent'] == None): return None
+def find_left_leaf(_tree, level = 0):
+  if (_tree == None or _tree['parent'] == None): return None
 
-  while (node['parent']['left'] == node):
-    if (node['parent'] == None): return None
-    node = node['parent']
-    if (node['parent'] == None): return None
+  while (_tree['parent']['left'] == _tree):
+    if (_tree['parent'] == None): return None
+    _tree = _tree['parent']
+    if (_tree['parent'] == None): return None
     level -= 1
 
-  node = node['parent']['left']
+  _tree = _tree['parent']['left']
 
   while (level < 0):
-    if is_leaf(node): level += 1; continue
-    if (node['right'] != None): node = node['right']
-    elif (node['left'] != None): node = node['left']
+    if is_leaf(_tree): level += 1; continue
+    if (_tree['right'] != None): _tree = _tree['right']
+    elif (_tree['left'] != None): _tree = _tree['left']
     level += 1
 
-  if (level == 0): return node
+  if (level == 0): return _tree
 
-  return find_left_leaf(node, level)
+  return find_left_leaf(_tree, level)
 
-def find_right_leaf(node, level = 0):
-  if (node == None or node['parent'] == None): return None
+def find_right_leaf(_tree, level = 0):
+  if (_tree == None or _tree['parent'] == None): return None
 
-  while (node['parent']['right'] == node):
-    if (node['parent'] == None): return None
-    node = node['parent']
+  while (_tree['parent']['right'] == _tree):
+    if (_tree['parent'] == None): return None
+    _tree = _tree['parent']
     level -= 1
 
-  node = node['parent']['right']
+  _tree = _tree['parent']['right']
 
   while (level < 0):
-    if is_leaf(node): level += 1; continue
-    if (node['left'] != None): node = node['left']
-    elif (node['right'] != None): node = node['right']
+    if is_leaf(_tree): level += 1; continue
+    if (_tree['left'] != None): _tree = _tree['left']
+    elif (_tree['right'] != None): _tree = _tree['right']
     level += 1
 
-  if (level == 0): return node    
+  if (level == 0): return _tree
 
-  return find_right_leaf(node, level)
+  return find_right_leaf(_tree, level)
