@@ -21,7 +21,7 @@ def parse_literal_pair(val):
     return _tree
   return leaf(val)
 
-def as_list(_tree): 
+def as_list(_tree):
   if (is_leaf(_tree)): return _tree['value']
   return [as_list(_tree['left']), as_list(_tree['right'])]
 
