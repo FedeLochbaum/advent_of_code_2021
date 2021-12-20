@@ -61,9 +61,8 @@ def find_left_leaf(_tree, level = 0):
   _tree = _tree['parent']['left']
 
   while (level < 0):
-    if is_leaf(_tree): level += 1; continue
-    if (_tree['right'] != None): _tree = _tree['right']
-    elif (_tree['left'] != None): _tree = _tree['left']
+    if is_leaf(_tree): return _tree
+    _tree = _tree['right']
     level += 1
 
   if (level == 0): return _tree
@@ -81,9 +80,8 @@ def find_right_leaf(_tree, level = 0):
   _tree = _tree['parent']['right']
 
   while (level < 0):
-    if is_leaf(_tree): level += 1; continue
-    if (_tree['left'] != None): _tree = _tree['left']
-    elif (_tree['right'] != None): _tree = _tree['right']
+    if is_leaf(_tree): return _tree
+    _tree = _tree['left']
     level += 1
 
   if (level == 0): return _tree

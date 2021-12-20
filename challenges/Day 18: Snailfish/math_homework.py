@@ -27,9 +27,9 @@ def reduce(_tree):
   if (any_literal_to_divide(_tree)): return reduce(divide_child(_tree))
   return _tree
 
-# with open(input_path) as f:
-#   _tree = parse_tree(f.readline()[:-1])
-#   for line in f: _tree = add(_tree, parse_tree(line[:-1]))
-#   print(magnitude(_tree))
+with open(input_path) as f:
+  _tree = parse_tree(f.readline()[:-1])
+  for line in f: _tree = add(_tree, parse_tree(line[:-1]))
+  print(magnitude(_tree))
 
-explode_child(parse_tree('[[[[5, 0], [[9, 7], [9, 6]]], [[4, [1, 2]], [[1, 4], 2]]], [[[5, [2, 8]], 4], [5, [[9, 9], 0]]]]'))
+# explode_child(parse_tree('[[[[5, 0], [[9, 7], [9, 6]]], [[4, [1, 2]], [[1, 4], 2]]], [[[5, [2, 8]], 4], [5, [[9, 9], 0]]]]'))
