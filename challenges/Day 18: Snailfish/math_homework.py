@@ -1,5 +1,5 @@
-input_path = 'advent_of_code_2021/challenges/Day 18: Snailfish/test3'
-from tree import tree, leaf, is_leaf, parse_tree, replace_node, find_to_explode, find_to_divide, any_literal_to_divide, find_right_leaf, find_left_leaf, as_list, height, magnitude
+input_path = 'advent_of_code_2021/challenges/Day 18: Snailfish/input'
+from tree import tree, leaf, is_leaf, parse_tree, replace_node, find_to_explode, find_to_divide, any_literal_to_divide, find_right_leaf, find_left_leaf, height, magnitude
 
 def add(pair1, pair2):
   _tree = tree(pair1, pair2)
@@ -19,7 +19,12 @@ def explode_child(_tree):
 def divide_child(_tree):
   _leaf = find_to_divide(_tree)
   value = _leaf['value']
-  replace_node(_leaf, tree(leaf(value//2), leaf(value//2 + (value % 2))))
+  _leaf1 = leaf(value//2)
+  _leaf2 = leaf(value//2 + (value % 2))
+  _new_tree = tree(_leaf1, _leaf2)
+  _leaf1['parent'] = _new_tree
+  _leaf2['parent'] = _new_tree
+  replace_node(_leaf, _new_tree)
   return _tree
 
 def reduce(_tree):
@@ -29,7 +34,6 @@ def reduce(_tree):
 
 with open(input_path) as f:
   _tree = parse_tree(f.readline()[:-1])
-  for line in f: _tree = add(_tree, parse_tree(line[:-1]))
+  for line in f:
+    _tree = add(_tree, parse_tree(line[:-1]))
   print(magnitude(_tree))
-
-# explode_child(parse_tree('[[[[5, 0], [[9, 7], [9, 6]]], [[4, [1, 2]], [[1, 4], 2]]], [[[5, [2, 8]], 4], [5, [[9, 9], 0]]]]'))
