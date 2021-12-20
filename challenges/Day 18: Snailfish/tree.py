@@ -1,4 +1,3 @@
-from collections import deque
 from ast import literal_eval
 
 LEAF = 'LEAF'
@@ -53,15 +52,16 @@ def find_to_explode(parent, level = 0):
 def find_left_leaf(node, level = 0):
   if (node == None or node['parent'] == None): return None
 
-  while (node['parent']['left'] == node or (node['parent']['left'] == None and node['parent']['right'] == node)):
+  while (node['parent']['left'] == node):
     if (node['parent'] == None): return None
     node = node['parent']
+    if (node['parent'] == None): return None
     level -= 1
 
   node = node['parent']['left']
 
   while (level < 0):
-    if is_leaf(node): level += 1; break
+    if is_leaf(node): level += 1; continue
     if (node['right'] != None): node = node['right']
     elif (node['left'] != None): node = node['left']
     level += 1
@@ -71,22 +71,19 @@ def find_left_leaf(node, level = 0):
   return find_left_leaf(node, level)
 
 def find_right_leaf(node, level = 0):
-  if (node == None or node['parent'] == None):
-    return None
+  if (node == None or node['parent'] == None): return None
 
-  while (node['parent']['right'] == node or (node['parent']['right'] == None and node['parent']['left'] == node)):
-    if (node['parent'] == None):
-      return None
-
+  while (node['parent']['right'] == node):
+    if (node['parent'] == None): return None
     node = node['parent']
     level -= 1
 
   node = node['parent']['right']
 
   while (level < 0):
+    if is_leaf(node): level += 1; continue
     if (node['left'] != None): node = node['left']
     elif (node['right'] != None): node = node['right']
-    else: break
     level += 1
 
   if (level == 0): return node    

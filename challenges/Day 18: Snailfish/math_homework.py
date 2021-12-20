@@ -1,4 +1,4 @@
-input_path = 'advent_of_code_2021/challenges/Day 18: Snailfish/test1'
+input_path = 'advent_of_code_2021/challenges/Day 18: Snailfish/test3'
 from tree import tree, leaf, is_leaf, parse_tree, replace_node, find_to_explode, find_to_divide, any_literal_to_divide, find_right_leaf, find_left_leaf, as_list, height
 
 magnitude = lambda pair: pair['value'] if is_leaf(pair) else 3 * magnitude(pair['left']) +  2 * magnitude(pair['right'])
@@ -13,8 +13,8 @@ def explode_child(parent):
   p = find_to_explode(parent)
   left = p['left']
   right = p['right']
-  l_leaf = find_left_leaf(p, 0)
-  r_leaf = find_right_leaf(p, 0)
+  l_leaf = find_left_leaf(p)
+  r_leaf = find_right_leaf(p, -1)
 
   replace_node(p, leaf(0))
   if(l_leaf != None): l_leaf['value'] += left['value']
@@ -29,20 +29,17 @@ def divide_child(_tree):
     leaf(value//2),
     leaf(value//2 + (1 if value % 2 == 1 else 0))
   ))
-
   return _tree
 
 def reduce(pair):
   print('reduce: ', as_list(pair))
-  if (height(pair) == 5):
-    return reduce(explode_child(pair))
+  if (height(pair) == 5): return reduce(explode_child(pair))
   if (any_literal_to_divide(pair)): return reduce(divide_child(pair))
   return pair
 
-# with open(input_path) as f:
-#   current = parse_tree(f.readline()[:-1])
-#   for line in f: current = add(current, parse_tree(line[:-1]))
-#   print(magnitude(current))
+with open(input_path) as f:
+  current = parse_tree(f.readline()[:-1])
+  for line in f: current = add(current, parse_tree(line[:-1]))
+  print(magnitude(current))
 
-
-reduce(parse_tree('[[[[0,7],4],[7,[[8,4],9]]],[1,1]]'))
+# reduce(parse_tree('[[[[0,7],4],[7,[[8,4],9]]],[1,1]]'))
