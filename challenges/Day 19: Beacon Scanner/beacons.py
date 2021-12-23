@@ -14,6 +14,8 @@ combinations = lambda array: reduce(lambda acc, elem: acc + [
 get_diff = lambda base_point, _point: (base_point[0] - _point[0], base_point[1] - _point[1], base_point[2] - _point[2])
 apply_diff = lambda point, diff: (diff[0] + point[0], diff[1] + point[1], diff[2] + point[2])
 
+LOWER_BOUND = 12
+
 scanners = deque()
 scanner_0 = None
 current = None
@@ -23,8 +25,8 @@ with open(input_path) as f:
     if re.match('--- scanner', line[:-1]):
       label = line[12]
       current = Scanner(label)
-      if (label == '0'): scanner_0 = current
-      else: scanners.append(current)
+      if (label == '1'): scanner_0 = current
+      scanners.append(current)
     else:
       point = line[:-1].split(',')
       current.add_point((int(point[0]), int(point[1]), int(point[2])))
@@ -36,9 +38,10 @@ def try_connect(base_scanner, scanner_to_connect):
     for _point in all_commbinations:
       for base_point in base_scanner.points:
         diff = get_diff(base_point, _point)
-        with_offset = list(map(lambda p: apply_diff(p, diff), all_commbinations))
-        intersection = set(scanner_to_connect.points).intersection(with_offset)
-        if len(intersection) >= 12: return diff
+        with_offset = list(map(lambda p: apply_diff(p, diff), scanner_to_connect.points)) # No, all combination es conn respecto a un solo punto, 
+        intersection = set(base_scanner.points).intersection(with_offset)
+        if ( len(intersection) > 1): print(len(intersection))
+        if len(intersection) >= LOWER_BOUND: return diff
   return None
 
 # Solution
@@ -47,6 +50,7 @@ while(scanners):
   diff = try_connect(scanner_0, scanner)
   if (diff != None):
     print('Descarto scanner: ', scanner.label)
+    print('diff :', diff)
     for point in scanner.points:
       real_point = apply_diff(point, diff)
       if (not real_point in scanner_0.points): scanner_0.add_point(real_point)
