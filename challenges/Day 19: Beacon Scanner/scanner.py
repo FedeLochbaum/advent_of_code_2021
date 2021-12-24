@@ -1,7 +1,9 @@
 from functools import reduce
 import itertools
 
-def manhattan(a, b): return sum(abs(val1-val2) for val1, val2 in zip(a,b))
+def manhattan(a, b): return sum(abs(val2-val1) for val1, val2 in zip(a,b))
+  # return sum([abs(a[0] - b[0]), abs(a[1] - b[1]), abs(a[2] - b[2]) ])
+# 
 
 negative_combinations = lambda elem: [
   (elem[0], elem[1], elem[2]), # all positive
@@ -45,6 +47,11 @@ class Scanner:
       for my_point in self.points:
         for _point in combinations(my_point):
           base_diff = get_diff(point, _point)
+          if (
+            manhattan([base_diff[0]], [point[0]]) > 1000 or
+            manhattan([base_diff[1]], [point[1]]) > 1000 or
+            manhattan([base_diff[2]], [point[2]]) > 1000
+            ) : continue
           for delta in negative_combinations((1, 1, 1)):
             for permutation in itertools.permutations((0, 1, 2)):
               self.possibles[point].append((base_diff, delta, permutation))
