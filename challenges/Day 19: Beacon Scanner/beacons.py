@@ -1,9 +1,9 @@
-input_path = 'advent_of_code_2021/challenges/Day 19: Beacon Scanner/test'
+input_path = 'advent_of_code_2021/challenges/Day 19: Beacon Scanner/input'
 import re
 from collections import deque
 from scanner import Scanner, apply_diff_and_delta, apply_permutation
 
-LOWER_BOUND = 5
+LOWER_BOUND = 2
 
 scanners = deque()
 scanner_0 = None
@@ -22,7 +22,7 @@ with open(input_path) as f:
 
 def try_match(base_scanner, scanner_to_connect):
   for base_point in base_scanner.points:
-    for (diff, delta, perm) in scanner_to_connect.get_possibles(base_point):
+    for diff, delta, perm in scanner_to_connect.get_possibles(base_point):
       count = 0
       for p in scanner_to_connect.points:
         count+= 1 if base_scanner.has_point(apply_diff_and_delta(apply_permutation(p, perm), diff, delta)) else 0
@@ -33,17 +33,15 @@ def try_match(base_scanner, scanner_to_connect):
 max_scanners = [scanner_0]
 while(scanners):
   scanner = scanners.popleft()
-  print('check with scanner ', scanner.label)
   diff, delta, permutation = try_match(scanner_0, scanner)
   if (diff != None):
-    print('diff que matchea:', diff, ' con scanner: ', scanner.label)
     scanner.set_pos(diff)
+    del scanner.possibles
     max_scanners.append(scanner)
     for point in scanner.points:
       real_point = apply_diff_and_delta(apply_permutation(point, permutation), diff, delta)
-      if (not real_point in scanner_0.points): scanner_0.add_point(real_point)
-  else:
-    scanners.append(scanner)
+      if (not scanner_0.has_point(real_point)): scanner_0.add_point(real_point)
+  else: scanners.append(scanner)
 
 print(len(scanner_0.points))
 
