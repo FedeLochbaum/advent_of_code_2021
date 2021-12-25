@@ -1,4 +1,4 @@
-from functools import reduce  
+from functools import reduce
 input_path = 'advent_of_code_2021/challenges/Day 3: Binary Diagnostic/input'
 
 # Part 1
