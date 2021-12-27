@@ -1,6 +1,6 @@
 python3 -m cProfile advent_of_code_2021/challenges/Day\ 20:\ Trench\ Map/image_enhancement.py
 17172
-         85802570 function calls in 34.041 seconds
+         45998620 function calls in 19.052 seconds
 
    Ordered by: standard name
 
@@ -10,25 +10,25 @@ python3 -m cProfile advent_of_code_2021/challenges/Day\ 20:\ Trench\ Map/image_e
         1    0.000    0.000    0.000    0.000 codecs.py:309(__init__)
         3    0.000    0.000    0.000    0.000 codecs.py:319(decode)
         1    0.000    0.000    0.000    0.000 codecs.py:331(getstate)
-        1    0.001    0.001   35.283   35.283 image_enhancement.py:1(<module>)
- 19861200   14.821    0.000   17.504    0.000 image_enhancement.py:11(<lambda>)
-  2206800    3.437    0.000    3.437    0.000 image_enhancement.py:12(<listcomp>)
- 19861200    6.740    0.000   24.243    0.000 image_enhancement.py:13(<lambda>)
-    90300    0.009    0.000    0.009    0.000 image_enhancement.py:23(<genexpr>)
-       50    0.000    0.000   35.260    0.705 image_enhancement.py:6(<lambda>)
-       50    0.012    0.000   35.260    0.705 image_enhancement.py:6(<listcomp>)
-        1    0.000    0.000   35.265   35.265 image_enhancement.py:7(<lambda>)
-  2206800    2.838    0.000   34.006    0.000 image_enhancement.py:9(enhanced_value)
+        1    0.000    0.000   19.782   19.782 image_enhancement.py:1(<module>)
+ 10635300    7.958    0.000    9.411    0.000 image_enhancement.py:11(<lambda>)
+  1181700    2.055    0.000    2.055    0.000 image_enhancement.py:12(<listcomp>)
+ 10635300    3.923    0.000   13.334    0.000 image_enhancement.py:13(<lambda>)
+    40200    0.004    0.000    0.004    0.000 image_enhancement.py:22(<genexpr>)
+       50    0.000    0.000   19.771    0.395 image_enhancement.py:6(<lambda>)
+       50    0.011    0.000   19.771    0.395 image_enhancement.py:6(<listcomp>)
+        1    0.000    0.000   19.774   19.774 image_enhancement.py:7(<lambda>)
+  1181700    1.659    0.000   19.029    0.000 image_enhancement.py:9(enhanced_value)
         3    0.000    0.000    0.000    0.000 {built-in method _codecs.utf_8_decode}
-        1    0.005    0.005   35.265   35.265 {built-in method _functools.reduce}
+        1    0.003    0.003   19.774   19.774 {built-in method _functools.reduce}
         1    0.000    0.000    0.000    0.000 {built-in method _locale.nl_langinfo}
-        1    0.000    0.000   35.283   35.283 {built-in method builtins.exec}
- 39368950    2.683    0.000    2.683    0.000 {built-in method builtins.len}
+        1    0.000    0.000   19.782   19.782 {built-in method builtins.exec}
+ 21142300    1.454    0.000    1.454    0.000 {built-in method builtins.len}
         1    0.000    0.000    0.000    0.000 {built-in method builtins.print}
-      300    0.008    0.000    0.017    0.000 {built-in method builtins.sum}
+      200    0.004    0.000    0.008    0.000 {built-in method builtins.sum}
         1    0.000    0.000    0.000    0.000 {built-in method io.open}
         1    0.000    0.000    0.000    0.000 {method '__exit__' of '_io._IOBase' objects}
       100    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
-  2206800    3.487    0.000   27.731    0.000 {method 'join' of 'str' objects}
-        1    0.000    0.000    0.000    0.000 {method 'readline' of '_io.TextIOWrapper' objects}  
+  1181700    1.981    0.000   15.315    0.000 {method 'join' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'readline' of '_io.TextIOWrapper' objects}
