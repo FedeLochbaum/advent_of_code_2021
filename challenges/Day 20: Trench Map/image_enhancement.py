@@ -4,7 +4,7 @@ from functools import reduce
 enhancement = ''; image = []; to_bin = { '.': '0', '#': '1' }
 
 enhance = lambda input, it: [[ enhanced_value(r - 1, c - 1, input, it) for c in range(len(input[0]) + 2)] for r in range(len(input) + 2)]
-enhance_image = lambda input, times: reduce(lambda img, it: enhance(img, it), range(times), input)
+enhance_image = lambda input, times: reduce(enhance, range(times), input)
 
 def enhanced_value(r, c, input, it):
   default = '0' if it % 2 == 0 else '1'
