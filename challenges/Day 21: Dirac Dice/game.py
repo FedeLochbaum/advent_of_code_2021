@@ -1,6 +1,5 @@
 
 from copy import deepcopy
-import random
 
 initial_state = lambda pos1, pos2: (2, (int(pos1), 0), (int(pos2), 0)) # Game state = (turnOf, (pos, score), (pos, score), id, level)
 won = lambda state, index: state[index][1] >= 21
@@ -31,20 +30,15 @@ def next_state_by_dice(node, dice1, dice2, dice3):
 class Game:
   def __init__(self):
     self.graph = {}
-    self.scores = { 'player1': 0, 'player2': 0 }
 
   def __getitem__(self, node):
     str_node = str(node)
-    if (won(node, 1) or won(node, 2)):
-      # self.graph[str_node] = []
-      self.scores['player1' if won(node, 1) else 'player2'] += 1
-      return []
+    if (won(node, 1) or won(node, 2)): return []
     if str_node not in self.graph:
       self.graph[str_node] = []
       for dice1 in range(1, 4):
         for dice2 in range(1, 4):
           for dice3 in range(1, 4):
             self.graph[str_node].append(next_state_by_dice(node, dice1, dice2, dice3))
-    else: print('repito estados')
 
     return self.graph[str_node]
