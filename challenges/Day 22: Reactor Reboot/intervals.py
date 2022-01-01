@@ -1,4 +1,4 @@
-input_path = 'advent_of_code_2021/challenges/Day 22: Reactor Reboot/test0'
+input_path = 'advent_of_code_2021/challenges/Day 22: Reactor Reboot/input'
 from utils import min_max_sub_str, Interval, Point
 from functools import reduce
 
@@ -14,15 +14,14 @@ with open(input_path) as f:
     max = [int(x_max), int(y_max), int(z_max)]
     commands.append((on, Interval(Point(min), Point(max))))
 
-merge = []
 cuboids = []
 for cmd in commands:
   on, interval = cmd
-  if on: merge.append((cmd, interval))
+  merge = []
+  if on: merge.append(cmd)
   for c in cuboids:
     intersect = c[1].intersect(interval)
-    if intersect: merge.append((False, intersect))
+    if intersect: merge.append((not c[0], intersect))
   cuboids = cuboids + merge.copy()
-  # std::ranges::copy(merge, std::back_insert_iterator(cuboids))
 
 print(reduce(lambda acc, cmd: acc + ((1 if cmd[0] else -1) * cmd[1].count()), cuboids, 0))

@@ -20,9 +20,3 @@ class Interval:
     max_point = Point([min(self.max.int[0], interval.max.int[0]), min(self.max.int[1], interval.max.int[1]), min(self.max.int[2], interval.max.int[2])])
     if (min_point.int[0] > max_point.int[0] or min_point.int[1] > max_point.int[1] or min_point.int[2] > max_point.int[2]): return None
     return Interval(min_point, max_point)
-
-point_in_range = lambda point, _range: (
-  point[0] in range(_range[0][0], _range[1][0] + 1) and
-  point[1] in range(_range[0][1], _range[1][1] + 1) and
-  point[2] in range(_range[0][2], _range[1][2] + 1)
-)
