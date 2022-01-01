@@ -12,16 +12,13 @@ with open(input_path) as f:
     z_min, z_max = min_max_sub_str(z)
     min = [int(x_min), int(y_min), int(z_min)]
     max = [int(x_max), int(y_max), int(z_max)]
-    commands.append((on, Interval(Point(min), Point(max))))
+    interval = Interval(Point(min), Point(max))
+    cmd = (on, interval)
+    intersections = []
+    if on: intersections.append(cmd)
+    for prev_on, prev_int in commands:
+      intersect = prev_int.intersect(interval)
+      if intersect: intersections.append((not prev_on, intersect))
+    commands = commands + intersections
 
-cuboids = []
-for cmd in commands:
-  on, interval = cmd
-  merge = []
-  if on: merge.append(cmd)
-  for c in cuboids:
-    intersect = c[1].intersect(interval)
-    if intersect: merge.append((not c[0], intersect))
-  cuboids = cuboids + merge.copy()
-
-print(reduce(lambda acc, cmd: acc + ((1 if cmd[0] else -1) * cmd[1].count()), cuboids, 0))
+print(reduce(lambda acc, cmd: acc + (1 if cmd[0] else -1) * cmd[1].count(), commands, 0))
