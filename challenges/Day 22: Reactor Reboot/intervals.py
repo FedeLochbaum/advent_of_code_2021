@@ -55,13 +55,8 @@ with open(input_path) as f:
       min = [int(x_min), int(y_min), int(z_min)]
       max = [int(x_max), int(y_max), int(z_max)]
       interval = Interval(Point(min), Point(max))
-      # if on: tree.addi(interval.min.toOneD(), interval.max.toOneD(), interval)
-      # else: tree.remove_overlap(interval.min.toOneD(), interval.max.toOneD())
+      if on: tree.addi(interval.min.toOneD(), interval.max.toOneD(), interval)
+      else: tree.remove_overlap(interval.min.toOneD(), interval.max.toOneD())
 
 for i in tree.items():
   print(i)
-  # _min = i.data.min.int
-  # _max = i.data.max.int
-  # print(_min.toThreeD())
-  # print(_max.toThreeD())
-  # print( abs(_max[0] - _min[0]) * abs(_max[1] - _min[1]) * abs(_max[2] - _min[2]))
