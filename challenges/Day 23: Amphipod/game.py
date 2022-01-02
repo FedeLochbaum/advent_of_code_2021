@@ -36,13 +36,14 @@ def hallway_actions(state):
     if elem != '.':
       copied_state = deepcopy(state)
       copied_state[4][pos] = '.' # Modified copied
-      for i in reversed(range(pos)):
-        if (state[4][i] != '.'): break # case when there is another Letter
-        actions = actions + hallway_actions_by_index(copied_state, i, elem, 0, pos)
-
-      for i in range(pos + 1, len(empty_hallway)):
-        if (state[4][i] != '.'): break # case when there is another Letter
-        actions = actions + hallway_actions_by_index(copied_state, i, elem, 0, pos)
+      all_like_me = all(map(lambda x: x == elem, copied_state[goal[elem]]))
+      if all_like_me:
+        steps_to_enter = 1 if len(copied_state[goal[elem]]) == 1 else 2
+        _hallway = copied_state[4].copy()
+        cost = (abs(pos - room_pos[elem]) + steps_to_enter) * step_cost_by[elem]
+        __state = [copied_state[0].copy(), copied_state[1].copy(), copied_state[2].copy(), copied_state[3].copy(), _hallway]
+        __state[goal[elem]].insert(0, elem)
+        actions = actions + [(cost, __state)]
   return actions
 
 def actions_on_room(state, room_index, room):
@@ -67,6 +68,7 @@ class Game:
 
   def __getitem__(self, node):
     str_node = str(node)
+    if is_goal(node): return []
     if str_node not in self.graph:
       self.graph[str_node] = (
         actions_on_room(node, 0, 'A') +
@@ -77,5 +79,3 @@ class Game:
       )
 
     return self.graph[str_node]
-
-# node => (cost, node)
