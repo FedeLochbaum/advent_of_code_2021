@@ -1,12 +1,11 @@
 empty_hallway = ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
 
-# game_state = { A: [], B: [], C: [], D: [], hallway: [] }
 initial_state = lambda a, b, c, d: (a, b, c, d, empty_hallway.copy())
 step_cost_by = { 'A': 1, 'B': 10, 'C': 100, 'D': 1000 }
 room_pos = { 'A': 3, 'B': 5, 'C': 7, 'D': 9}
 goal = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 }
 
-is_final_state = lambda state: state == (['A', 'A'], ['B', 'B'], ['C', 'C'], ['D', 'D'], empty_hallway)
+is_goal = lambda state: state == (['A', 'A'], ['B', 'B'], ['C', 'C'], ['D', 'D'], empty_hallway)
 
 def hallway_actions_by_index(state, index, elem, steps_until_hallway, update_current_room, from_pos):
   actions = []
@@ -69,14 +68,13 @@ class Game:
 
   def __getitem__(self, node):
     str_node = str(node)
-    if is_final_state(node): return []
     if str_node not in self.graph:
       self.graph[str_node] = (
-        actions_on_room(node, 0, 'A') + []
-        # actions_on_room(node, 1, 'B') +
-        # actions_on_room(node, 2, 'C') +
-        # actions_on_room(node, 3, 'D') +
-        # hallway_actions(node)
+        actions_on_room(node, 0, 'A') +
+        actions_on_room(node, 1, 'B') +
+        actions_on_room(node, 2, 'C') +
+        actions_on_room(node, 3, 'D') +
+        hallway_actions(node)
       )
 
     return self.graph[str_node]
