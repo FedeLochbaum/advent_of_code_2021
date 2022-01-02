@@ -1,5 +1,6 @@
 input_path = 'advent_of_code_2021/challenges/Day 23: Amphipod/test'
 from game import Game, initial_state, room_pos, is_goal
+from collections import deque
 
 A = []; B = []; C = []; D = []
 memoization = {}
@@ -12,9 +13,6 @@ with open(input_path) as f:
         elif col == room_pos['C']: C.append(c)
         elif col == room_pos['D']: D.append(c)
 
-
-from collections import deque
-
 def play_bfs(graph, initial_node, is_goal):
   queue = deque()
   visited = set()
@@ -25,8 +23,8 @@ def play_bfs(graph, initial_node, is_goal):
     print('node, cost ', node, cost )
     if is_goal(node):
       print('solution: ', node, cost)
-      continue
-      # return node, cost
+      # continue
+      return node, cost
     for state_cost, next in graph[node]:
       if str(next) not in visited:
         visited.add(str(next))
