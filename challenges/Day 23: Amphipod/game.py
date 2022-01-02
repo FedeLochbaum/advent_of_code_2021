@@ -10,21 +10,21 @@ is_goal = lambda state: state == [['A', 'A'], ['B', 'B'], ['C', 'C'], ['D', 'D']
 
 def hallway_actions_by_index(state, index, elem, steps_until_hallway, from_pos):
   actions = []
-  if (not index in [room_pos['A'], room_pos['B'], room_pos['C'], room_pos['D']]): #NOT SURE
+  if (not index in [room_pos['A'], room_pos['B'], room_pos['C'], room_pos['D']]):
     new_hallway = state[4].copy()
     new_hallway[index] = elem
     cost = (steps_until_hallway + abs(from_pos - index)) * step_cost_by[elem]
     _state = [state[0].copy(), state[1].copy(), state[2].copy(), state[3].copy(), new_hallway]
     actions.append((cost, _state))
-  actions = actions + case_to_enter_on_room(index, state, elem, steps_until_hallway, from_pos)
+  actions = actions + case_to_enter_on_room(state, index, elem, steps_until_hallway, from_pos)
   return actions
 
-def case_to_enter_on_room(hallway_index, current_state, elem, steps_until_hallway, from_pos):
+def case_to_enter_on_room(current_state, hallway_index, elem, steps_until_hallway, from_pos):
   all_like_me = all(map(lambda x: x == elem, current_state[goal[elem]]))
   if (hallway_index == room_pos[elem] and all_like_me):
     steps_to_enter = 1 if len(current_state[goal[elem]]) == 1 else 2
     _hallway = current_state[4].copy()
-    cost = (steps_until_hallway + (from_pos - hallway_index) + steps_to_enter) * step_cost_by[elem]
+    cost = (steps_until_hallway + abs(from_pos - hallway_index) + steps_to_enter) * step_cost_by[elem]
     __state = [current_state[0].copy(), current_state[1].copy(), current_state[2].copy(), current_state[3].copy(), _hallway]
     __state[goal[elem]].insert(0, elem)
     return [(cost, __state)]
