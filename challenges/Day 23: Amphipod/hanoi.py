@@ -1,6 +1,8 @@
-input_path = 'advent_of_code_2021/challenges/Day 23: Amphipod/test2'
-from game import Game, initial_state, room_pos, is_goal
-from collections import deque
+input_path = 'advent_of_code_2021/challenges/Day 23: Amphipod/input2'
+from game import Game, initial_state, room_pos, heuristic, is_goal
+from queue import PriorityQueue
+
+UPPER_BOUND = 80000
 
 A = []; B = []; C = []; D = []
 memoization = {}
@@ -13,16 +15,14 @@ with open(input_path) as f:
         elif col == room_pos['C'] + 1: C.append(c)
         elif col == room_pos['D'] + 1: D.append(c)
 
-def play_bfs(graph, initial_node, is_goal):
-  queue = deque()
+def a_star(graph, initialNode, h):
+  pqueue = PriorityQueue()
   visited = set()
-  queue.append((initial_node, 0))
-  visited.add((str(initial_node), 0))
-  min_cost = float('inf')
-  while(queue):
-    node, cost = queue.popleft()
+  pqueue.put((h(initialNode), initialNode, 0))
+  min_cost = UPPER_BOUND
+  while not pqueue.empty():
+    priority, node, cost = pqueue.get_nowait()
     if is_goal(node):
-      print('a comparar: ', cost, min_cost)
       min_cost = min(min_cost, cost); continue
     if cost >= min_cost: continue
     for state_cost, next in graph[node]:
@@ -30,28 +30,12 @@ def play_bfs(graph, initial_node, is_goal):
       if n_cost >= min_cost: continue
       if (str(next), n_cost) not in visited:
         visited.add((str(next), n_cost))
-        queue.append((next, n_cost))
+        pqueue.put((
+          priority + h(next),
+          next,
+          n_cost
+        ))
   return min_cost
 
-def play_dfs(graph, initial_node, is_goal):
-  stack = deque()
-  visited = set()
-  stack.append((initial_node, 0))
-  visited.add((str(initial_node), 0))
-  min_cost = float('inf')
-  while(stack):
-    node, cost = stack.pop()
-    if is_goal(node):
-      print('a comparar: ', cost, min_cost)
-      min_cost = min(min_cost, cost); continue
-    if cost >= min_cost: continue
-    for state_cost, next in graph[node]:
-      n_cost = cost + state_cost
-      if n_cost >= min_cost: continue
-      if (str(next), n_cost) not in visited:
-        visited.add((str(next), n_cost))
-        stack.append((next, n_cost))
-  return min_cost
-
-# print(play_bfs(Game(), initial_state(A, B, C, D), is_goal))
-print(play_dfs(Game(), initial_state(A, B, C, D), is_goal))
+print(a_star(Game(), initial_state(A, B, C, D), heuristic))
+# 48541

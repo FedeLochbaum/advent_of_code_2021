@@ -1,12 +1,33 @@
 from copy import deepcopy
 empty_hallway = ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
 
+DEPTH = 4
 initial_state = lambda a, b, c, d: (a, b, c, d, empty_hallway.copy())
 step_cost_by = { 'A': 1, 'B': 10, 'C': 100, 'D': 1000 }
 room_pos = { 'A': 2, 'B': 4, 'C': 6, 'D': 8 }
 goal = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 }
 
-is_goal = lambda state: state == [['A', 'A', 'A', 'A'], ['B', 'B', 'B', 'B'], ['C', 'C', 'C', 'C'], ['D', 'D', 'D', 'D'], empty_hallway]
+def heuristic(state):
+  count = 0
+  for i in state[0]:
+    if i != 'A': count +=1
+  for i in state[1]:
+    if i != 'B': count +=1
+  for i in state[2]:
+    if i != 'C': count +=1
+  for i in state[3]:
+    if i != 'D': count +=1
+  for i in state[4]:
+    if i != '.': count +=1
+  return count
+
+is_goal = lambda state: (
+  all(map(lambda x: x == 'A', state[0])) and
+  all(map(lambda x: x == 'B', state[1])) and
+  all(map(lambda x: x == 'C', state[2])) and
+  all(map(lambda x: x == 'D', state[3])) and
+  state[4] == empty_hallway
+)
 
 def hallway_actions_by_index(state, index, elem, steps_until_hallway, from_pos):
   actions = []
@@ -19,9 +40,8 @@ def hallway_actions_by_index(state, index, elem, steps_until_hallway, from_pos):
   return actions
 
 def case_to_enter_on_room(current_state, hallway_index, elem, steps_until_hallway, from_pos):
-  all_like_me = all(map(lambda x: x == elem, current_state[goal[elem]]))
-  if (hallway_index == room_pos[elem] and all_like_me):
-    steps_to_enter = abs(len(current_state[goal[elem]]) - 4)
+  if (hallway_index == room_pos[elem] and all(map(lambda x: x == elem, current_state[goal[elem]]))):
+    steps_to_enter = abs(len(current_state[goal[elem]]) - DEPTH)
     cost = (steps_until_hallway + abs(from_pos - hallway_index) + steps_to_enter) * step_cost_by[elem]
     __state = deepcopy(current_state)
     __state[goal[elem]].insert(0, elem)
@@ -32,10 +52,10 @@ def hallway_actions(state):
   actions = []
   for pos, elem in enumerate(state[4]):
     if elem != '.':
-      copied_state = deepcopy(state)
-      copied_state[4][pos] = '.' # Modified copied
-      if all(map(lambda x: x == elem, copied_state[goal[elem]])):
-        steps_to_enter = abs(len(copied_state[goal[elem]]) - 4)
+      if all(map(lambda x: x == elem, state[goal[elem]])):
+        copied_state = deepcopy(state)
+        copied_state[4][pos] = '.' # Modified copied
+        steps_to_enter = abs(len(copied_state[goal[elem]]) - DEPTH)
         cost = (abs(pos - room_pos[elem]) + steps_to_enter) * step_cost_by[elem]
         copied_state[goal[elem]].insert(0, elem)
         actions = actions + [(cost, copied_state)]
@@ -44,7 +64,7 @@ def hallway_actions(state):
 def actions_on_room(state, room_index, room):
   actions = []
   if len(state[room_index]) == 0: return []
-  steps_until_hallway = abs(len(state[room_index]) - 4) + 1
+  steps_until_hallway = abs(len(state[room_index]) - DEPTH) + 1
   copied_state = deepcopy(state)
   head = copied_state[room_index].pop(0) # Modified copied
 
@@ -66,11 +86,11 @@ class Game:
     if is_goal(node): return []
     if str_node not in self.graph:
       self.graph[str_node] = (
+        hallway_actions(node) +
         actions_on_room(node, 0, 'A') +
         actions_on_room(node, 1, 'B') +
         actions_on_room(node, 2, 'C') +
-        actions_on_room(node, 3, 'D') +
-        hallway_actions(node)
+        actions_on_room(node, 3, 'D')
       )
 
     return self.graph[str_node]
