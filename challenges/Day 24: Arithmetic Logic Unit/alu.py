@@ -1,5 +1,4 @@
 # Four-dimensional processing unit
-
 class ALU:
   def __init__(self, reader):
     self.regs = { 'w': 0, 'x': 0, 'y': 0, 'z': 0 }
@@ -22,6 +21,3 @@ class ALU:
     self.regs[a] %= b
 
   def eql(self, a, b): self.regs[a] = 1 if self.regs[a] == self.value(b) else 0
-
-
-  # def __getitem__(self, node):

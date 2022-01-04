@@ -11,9 +11,18 @@ def execute(alu):
       else: a, b = line[:-1][4:].split(' ')
       getattr(alu, cmd)(a, b)
 
-alu = ALU(None)
-for i in range(11111111111111, 99999999999999):
-  input = list(map(int, str(i)))
-  alu.reader = Reader(input)
+median = 44444444444444
+reader = Reader([])
+alu = ALU(reader)
+
+def check_input(number):
+  alu.clean()
+  input = list(map(int, str(number)))
+  if 0 in input: return False
+  alu.reader.values = input
   execute(alu)
-  if (alu.regs['z'] == 0): print(input); break
+  if (alu.regs['z'] == 0): print(input); return True
+  return False
+
+for i in range(0, 55555555555556):
+  if (check_input(median + i) or check_input(median - i)): break
