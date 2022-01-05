@@ -47,11 +47,10 @@
 
 [Day 21: Dirac Dice](https://github.com/FedeLochbaum/advent_of_code_2021/blob/main/challenges/Day%2021:%20Dirac%20Dice/all_universes.py)
 
-[Day 22: Reactor Reboot]()
+[Day 22: Reactor Reboot](https://github.com/FedeLochbaum/advent_of_code_2021/blob/main/challenges/Day%2022:%20Reactor%20Reboot/intervals.py)
 
-[Day 23: Amphipod]()
+[Day 23: Amphipod](https://github.com/FedeLochbaum/advent_of_code_2021/blob/main/challenges/Day%2023:%20Amphipod/hanoi.py)
 
-[Day 24: Arithmetic Logic Unit]()
+[Day 24: Arithmetic Logic Unit](https://github.com/FedeLochbaum/advent_of_code_2021/blob/main/challenges/Day%2024:%20Arithmetic%20Logic%20Unit/compute2.py)
 
-[Day 25: Sea Cucumber]()
-
+[Day 25: Sea Cucumber](https://github.com/FedeLochbaum/advent_of_code_2021/blob/main/challenges/Day%2025:%20Sea%20Cucumber/sea_cucumbers.py)
