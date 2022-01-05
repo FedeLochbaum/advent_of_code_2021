@@ -1,4 +1,4 @@
-input_path = 'advent_of_code_2021/challenges/Day 25: Sea Cucumber/test'
+input_path = 'advent_of_code_2021/challenges/Day 25: Sea Cucumber/input'
 from copy import deepcopy
 # sea cucumbers = v | >
 
@@ -15,7 +15,8 @@ def can_move_right(r, c, map, mutable_map):
   return map[r][c + 1] == '.'
 
 def can_move_bottom(r, c, map, mutable_map):
-  if len(mutable_map) - 1 == r: return map[0][c] == '.' or (map[0][c] == '>' and can_move_right(0, c, map, mutable_map))
+  if len(mutable_map) - 1 == r:
+    return (map[0][c] == '.' and not mutable_map[0][c] == '>') or (map[0][c] == '>' and can_move_right(0, c, map, mutable_map))
   elif map[r + 1][c] == '.':
     if c == 0: return map[r+1][len(mutable_map[r+1]) - 1] != '>'
     if map[r+1][c - 1] == '>': return False
@@ -60,8 +61,8 @@ def step(map):
   return mutable_map, movements
 
 movements = None
-while(movements != 0 and steps < 3):
+while(movements != 0):
   map, movements = step(map); steps += 1
-  for i in map: print(''.join(i))
-  print('\n')
+  # for i in map: print(''.join(i))
+  # print('\n')
 print(steps)
