@@ -1,6 +1,5 @@
 input_path = 'advent_of_code_2021/challenges/Day 25: Sea Cucumber/input'
 from copy import deepcopy
-# sea cucumbers = v | >
 
 map = []
 steps = 0
@@ -63,6 +62,4 @@ def step(map):
 movements = None
 while(movements != 0):
   map, movements = step(map); steps += 1
-  # for i in map: print(''.join(i))
-  # print('\n')
 print(steps)
