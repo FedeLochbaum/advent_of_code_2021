@@ -11,7 +11,6 @@ def execute(alu):
       else: a, b = line[:-1][4:].split(' ')
       getattr(alu, cmd)(a, b)
 
-median = 44444444444444
 reader = Reader([])
 alu = ALU(reader)
 
@@ -21,8 +20,7 @@ def check_input(number):
   if 0 in input: return False
   alu.reader.values = input
   execute(alu)
-  if (alu.regs['z'] == 0): print(input); return True
-  return False
+  return alu.regs['z'] == 0
 
-for i in range(0, 55555555555556):
-  if (check_input(median + i) or check_input(median - i)): break
+for point in range(15599469991738, 19599469991738):
+  if (check_input(point)): print(point); break
