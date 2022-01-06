@@ -1,6 +1,6 @@
 input_path = 'advent_of_code_2021/challenges/Day 24: Arithmetic Logic Unit/input'
 
-divs = []; offsets = []; modifiers = []
+divs = []; offsets = []; mods = []
 n_line = 0
 with open(input_path) as f:
   for i, line in enumerate(f):
@@ -11,21 +11,20 @@ with open(input_path) as f:
     n_line = i % 18
     if n_line == 4: divs.append(int(b))
     if n_line == 5: offsets.append(int(b))
-    if n_line == 15: modifiers.append(int(b))
+    if n_line == 15: mods.append(int(b))
 
-def find_number(divs, offsets, modifiers, f):
+def find_number(divs, offsets, mods, f):
   z_values = { 0: 0 }
-  updated = {}
+  iter_z_values = {}
   for i in range(14):
     for z_key in z_values:
       for n in range(9, 0, -1):
-        candidate = z_values[z_key] * 10 + n
+        possible = z_values[z_key] * 10 + n
         z = int(z_key / divs[i])
-        if (((z_key % 26) + offsets[i]) != n): z = z * 26 + n + modifiers[i]
-        if (z == 0 and len(str(candidate)) == 14): print(candidate)
-        updated[z] = (f(updated[z], candidate) if z in updated else candidate)
-    z_values = updated.copy()
+        if ((z_key % 26) + offsets[i]) != n: z = z * 26 + n + mods[i]
+        iter_z_values[z] = (f(iter_z_values[z], possible) if z in iter_z_values else possible)
+    z_values = iter_z_values.copy()
   return z_values[0]
 
-# print(find_number(divs, offsets, modifiers, max))
-print(find_number(divs, offsets, modifiers, min))
+# print(find_number(divs, offsets, mods, max))
+print(find_number(divs, offsets, mods, min))

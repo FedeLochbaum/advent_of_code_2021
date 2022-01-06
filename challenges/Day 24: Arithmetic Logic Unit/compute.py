@@ -22,5 +22,8 @@ def check_input(number):
   execute(alu)
   return alu.regs['z'] == 0
 
-for point in range(15599469991738, 19599469991738):
+LOWER_BOUND = 15599469991738
+UPPER_BOUND = 19599469991738
+
+for point in range(LOWER_BOUND, UPPER_BOUND):
   if (check_input(point)): print(point); break
